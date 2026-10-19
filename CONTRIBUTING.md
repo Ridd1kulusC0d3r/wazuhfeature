@@ -19,7 +19,7 @@ Este é um catálogo **independente** de funcionalidades e projetos do ecossiste
 
 ## Sugestão de referência
 
-Abra uma [nova issue](../../issues/new/choose) usando o modelo `Sugestão de repositório`, informando URL, capacidade, uso e cautelas. Para conteúdo aprovado, um PR pode atualizar o CSV e o módulo correspondente.
+Abra uma [nova issue](https://github.com/Ridd1kulusC0d3r/wazuhfeature/issues/new/choose) usando o modelo `Sugestão de repositório`, informando URL, capacidade, uso e cautelas. Para conteúdo aprovado, um PR pode atualizar o CSV e o módulo correspondente.
 
 ## Política de autoria, licenças e transparência
 
