@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Validação offline do índice de curadoria Wazuh. Nenhum download é feito."""
+"""Validador offline da curadoria e da identidade visual para GitHub."""
 from __future__ import annotations
 
 import csv
 import re
 import sys
-from collections import Counter
 from datetime import date
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "catalog" / "repositorios.csv"
@@ -18,7 +18,8 @@ REQUIRED = {
 }
 VALID_TIERS = {"A", "B", "C"}
 VALID_VERIFICATION = {"repo_confirmado", "repo_confirmado_readme"}
-MARKDOWN_LINK = re.compile(r"(?<!!)\[[^\]]*\]\(([^)]+)\)")
+MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+HTML_REF = re.compile(r"\b(?:href|src)\s*=\s*[\"']([^\"']+)[\"']", re.IGNORECASE)
 
 
 def validate_registry(errors: list[str]) -> int:
@@ -65,8 +66,9 @@ def validate_local_links(errors: list[str]) -> int:
         if ".git" in md.parts:
             continue
         data = md.read_text(encoding="utf-8")
-        for match in MARKDOWN_LINK.finditer(data):
-            target = match.group(1).strip().split(" ", 1)[0].strip("<>")
+        refs = [m.group(1).strip().split(" ", 1)[0].strip("<>") for m in MARKDOWN_LINK.finditer(data)]
+        refs.extend(m.group(1) for m in HTML_REF.finditer(data))
+        for target in refs:
             if not target or target.startswith("#"):
                 continue
             parsed = urlsplit(target)
@@ -84,15 +86,38 @@ def validate_local_links(errors: list[str]) -> int:
     return total
 
 
+def validate_svg_assets(errors: list[str]) -> int:
+    count = 0
+    for svg in (ROOT / "docs" / "assets").glob("*.svg"):
+        count += 1
+        try:
+            root = ElementTree.parse(svg).getroot()
+        except ElementTree.ParseError as exc:
+            errors.append(f"{svg.relative_to(ROOT)}: SVG XML invalido: {exc}")
+            continue
+        if root.tag != "{http://www.w3.org/2000/svg}svg":
+            errors.append(f"{svg.relative_to(ROOT)}: elemento raiz nao e SVG")
+        for node in root.iter():
+            tag = node.tag.split("}")[-1].lower()
+            if tag in {"script", "foreignobject", "image"}:
+                errors.append(f"{svg.relative_to(ROOT)}: elemento nao permitido: {tag}")
+            for name, value in node.attrib.items():
+                n = name.split("}")[-1].lower()
+                if n.startswith("on") or (n in {"href", "src"} and (value.startswith("http") or value.startswith("data:"))):
+                    errors.append(f"{svg.relative_to(ROOT)}: atributo ativo ou recurso externo")
+    return count
+
+
 def main() -> int:
     errors: list[str] = []
-    count = validate_registry(errors)
+    records = validate_registry(errors)
     links = validate_local_links(errors)
-    print(f"Curadoria: {count} registros, {links} links internos verificados.")
+    assets = validate_svg_assets(errors)
+    print(f"Curadoria: {records} registros, {links} links locais, {assets} SVGs examinados.")
     if errors:
         print("\n".join(f"ERROR: {item}" for item in errors), file=sys.stderr)
         return 1
-    print("PASS: inventario sem duplicacoes e documentacao local consistente.")
+    print("PASS: catalogo sem duplicacoes, links validos e SVGs passivos bem formados.")
     return 0
 
 
