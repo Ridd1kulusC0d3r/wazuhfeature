@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="650" height="185" viewBox="0 0 650 185" role="img" aria-label="WAR GAMES, Purple Team · Replay · Scoring">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c1d31"/><stop offset="1" stop-color="#132a43"/></linearGradient><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#9fbed7" opacity=".18"/></pattern></defs>
+<rect width="650" height="185" rx="17" fill="url(#bg)"/><rect width="650" height="185" rx="17" fill="url(#dots)"/><rect x="1" y="1" width="648" height="183" rx="16" fill="none" stroke="#2c4d68"/>
+<rect x="0" y="15" width="5" height="154" rx="2.5" fill="#86cfff"/>
+<g transform="translate(35,57)"><path d="M10 15H58V56H10Z" fill="none" stroke="#86cfff" stroke-width="3"/><path d="M10 30H58M25 15V56M42 30V56" stroke="#86cfff" stroke-width="2"/><circle cx="49" cy="22" r="4" fill="#86cfff"/><circle cx="17" cy="46" r="4" fill="#86cfff"/></g>
+<text x="144" y="84" font-size="27" font-family="Arial,Helvetica,sans-serif" font-weight="800" fill="#f5fbff">WAR GAMES</text>
+<text x="144" y="116" font-size="18" font-family="Arial,Helvetica,sans-serif" fill="#a7c4dc">Purple Team · Replay · Scoring</text>
+<path d="M144 145H510" stroke="#41637e" stroke-width="1"/>
+<text x="144" y="165" font-family="Arial,Helvetica,sans-serif" font-size="11" font-weight="700" letter-spacing="1.2" fill="#86cfff">EXPLORE REPOSITORIES  →</text>
+<path d="M591 27H620V56" stroke="#86cfff" stroke-width="2.3" fill="none" opacity=".75"/>
+</svg>
