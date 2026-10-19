@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Símbolo original do Feature Atlas: circuito de quatro nós conectados">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#081322"/><stop offset="1" stop-color="#183753"/></linearGradient><linearGradient id="line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#54e4e9"/><stop offset="1" stop-color="#82aaff"/></linearGradient></defs>
+<rect width="220" height="220" rx="44" fill="url(#bg)"/>
+<path d="M110 40L180 110L110 180L40 110Z" fill="none" stroke="#3c698c" stroke-width="5"/>
+<path d="M110 60V160M60 110H160" stroke="url(#line)" stroke-width="7" stroke-linecap="round"/>
+<circle cx="110" cy="110" r="29" fill="#16344c" stroke="#54e4e9" stroke-width="7"/>
+<circle cx="110" cy="110" r="9" fill="#54e4e9"/>
+<circle cx="110" cy="40" r="8" fill="#82aaff"/><circle cx="110" cy="180" r="8" fill="#82aaff"/><circle cx="40" cy="110" r="8" fill="#54e4e9"/><circle cx="180" cy="110" r="8" fill="#54e4e9"/>
+</svg>
