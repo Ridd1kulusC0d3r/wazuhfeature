@@ -1,0 +1,56 @@
+name: "Sugestão de repositório"
+description: "Indique um projeto relevante ao Wazuh Feature Atlas"
+title: "Reference: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "Proponha referências com proveniência e contexto. Não inclua segredos, dados pessoais ou telemetria privada."
+  - type: input
+    id: repository
+    attributes:
+      label: "URL do repositório original"
+      placeholder: "https://github.com/owner/repo"
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: "Domínio funcional principal"
+      options:
+        - "Threat Hunting / DFIR"
+        - "CTI / Retro-Hunting"
+        - "Incident Response / SOAR"
+        - "War Games / Validation"
+        - "Detection Engineering"
+        - "Platform / Automation / AI"
+        - "Other"
+    validations:
+      required: true
+  - type: textarea
+    id: benefits
+    attributes:
+      label: "Qual funcionalidade resolve?"
+      description: "Explique a contribuição de forma verificável."
+      placeholder: "Artefatos e problema resolvido..."
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: "Artefatos e evidências observados"
+      description: "README, scripts, fixtures, testes, demonstrações etc. Distinga declarado de testado."
+  - type: textarea
+    id: limitations
+    attributes:
+      label: "Compatibilidade, licença e limitações"
+      description: "Inclua ressalvas e versões conhecidas. Não presuma disponibilidade ou maturidade."
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Verificação"
+      options:
+        - label: "Verifiquei se o repositório já consta do CSV da curadoria."
+          required: true
+        - label: "Não incluí dados privados nem credenciais."
+          required: true
